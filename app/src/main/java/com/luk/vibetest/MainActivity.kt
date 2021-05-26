@@ -74,6 +74,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        for (i in 10L..150L step 10L) {
+            val button = Button(this)
+            button.text = "${i}ms"
+            button.setOnClickListener { _ ->
+                val vib = getSystemService(VIBRATOR_SERVICE) as Vibrator
+                vib.vibrate(VibrationEffect.createOneShot(i, VibrationEffect.DEFAULT_AMPLITUDE))
+            }
+
+            val layout = findViewById<View>(R.id.layout) as LinearLayout
+            layout.addView(
+                button,
+                FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+        }
+
         enumValues<Effect>().forEach {
             val button = Button(this)
             button.text = it.name
