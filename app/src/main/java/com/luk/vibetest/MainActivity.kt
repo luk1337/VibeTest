@@ -1,8 +1,6 @@
 package com.luk.vibetest
 
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
+import android.os.*
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
@@ -79,7 +77,14 @@ class MainActivity : AppCompatActivity() {
             button.text = "${i}ms"
             button.setOnClickListener { _ ->
                 val vib = getSystemService(VIBRATOR_SERVICE) as Vibrator
-                vib.vibrate(VibrationEffect.createOneShot(i, VibrationEffect.DEFAULT_AMPLITUDE))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    vib.vibrate(
+                        VibrationEffect.createOneShot(i, VibrationEffect.DEFAULT_AMPLITUDE),
+                        VibrationAttributes.createForUsage(VibrationAttributes.USAGE_MEDIA)
+                    )
+                } else {
+                    vib.vibrate(VibrationEffect.createOneShot(i, VibrationEffect.DEFAULT_AMPLITUDE))
+                }
             }
 
             val layout = findViewById<View>(R.id.layout) as LinearLayout
@@ -97,7 +102,14 @@ class MainActivity : AppCompatActivity() {
             button.text = it.name
             button.setOnClickListener { _ ->
                 val vib = getSystemService(VIBRATOR_SERVICE) as Vibrator
-                vib.vibrate(VibrationEffect.createPredefined(it.ordinal))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    vib.vibrate(
+                        VibrationEffect.createPredefined(it.ordinal),
+                        VibrationAttributes.createForUsage(VibrationAttributes.USAGE_MEDIA)
+                    )
+                } else {
+                    vib.vibrate(VibrationEffect.createPredefined(it.ordinal))
+                }
             }
 
             val layout = findViewById<View>(R.id.layout) as LinearLayout
