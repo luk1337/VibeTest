@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             val button = Button(this)
             button.text = "${i}ms"
             button.setOnClickListener { _ ->
-                val vib = getSystemService(VIBRATOR_SERVICE) as Vibrator
+                val vib = getSystemService(Vibrator::class.java)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     vib.vibrate(
                         VibrationEffect.createOneShot(i, VibrationEffect.DEFAULT_AMPLITUDE),
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             val button = Button(this)
             button.text = it.name
             button.setOnClickListener { _ ->
-                val vib = getSystemService(VIBRATOR_SERVICE) as Vibrator
+                val vib = getSystemService(Vibrator::class.java)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     vib.vibrate(
                         VibrationEffect.createPredefined(it.ordinal),
