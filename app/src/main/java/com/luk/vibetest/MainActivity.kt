@@ -1,7 +1,10 @@
 package com.luk.vibetest
 
 import android.os.*
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -120,6 +123,25 @@ class MainActivity : AppCompatActivity() {
                     FrameLayout.LayoutParams.WRAP_CONTENT
                 )
             )
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_toggle_keyboard -> {
+                @Suppress("DEPRECATION")
+                getSystemService(InputMethodManager::class.java)?.toggleSoftInput(
+                    InputMethodManager.SHOW_FORCED,
+                    0
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
