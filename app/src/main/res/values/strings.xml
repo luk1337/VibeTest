@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VibeTest</string>
+    <string name="app_name" translatable="false">VibeTest</string>
 
     <string name="menu_toggle_keyboard">Toggle keyboard</string>
 </resources>
